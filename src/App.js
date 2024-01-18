@@ -7,6 +7,11 @@ export default function App() {
   const [yourFriendsTip, setYourFriendsTip] = useState(0);
 
   const pay = bill + (youTip / 100) * bill + (yourFriendsTip / 100) * bill;
+  function handleReset() {
+    setYourFriendsTip(null);
+    setBill(0);
+    setYouTip(null);
+  }
   return (
     <div>
       <Bill bill={bill} onBillChange={setBill} />
@@ -18,7 +23,8 @@ export default function App() {
         {" "}
         <label>How satisfied is you're Friend with the service??</label>
       </Tip>
-      <p>THe total pay is {pay}</p>
+      <Output pay={pay} />
+      <Reset handleReset={handleReset} />
     </div>
   );
 }
@@ -48,4 +54,12 @@ function Tip({ children, tip, onTipChange }) {
       </select>
     </div>
   );
+}
+
+function Output({ pay }) {
+  return <p>THe total pay is {pay}</p>;
+}
+
+function Reset({ handleReset }) {
+  return <button onClick={handleReset}>Reset</button>;
 }
